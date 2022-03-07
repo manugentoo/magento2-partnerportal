@@ -7,7 +7,7 @@
 </div>
 
 <div class="form-verify-otp">
-    <p><?=__('Simply enter your work email address to access your recommended products and special pricing.')?></p>
+    <p><?=__('Enter your email address to access your recommended products and special pricing.')?></p>
     <form class="form" action="<?=$block->getOtpActionUrl()?>" method="post">
         <input name="form_key" type="hidden" value="<?=$block->getFormKey();?>"/>
         <input type="hidden" name="partner_url" value="<?=$block->getPartner()->getUrl()?>"/>
