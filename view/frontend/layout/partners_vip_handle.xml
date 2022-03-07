@@ -10,7 +10,7 @@
     </head>
     <body>
         <referenceContainer name="content">
-            <container name="partner.portal" htmlTag="div" htmlClass="cell small-12 partner-portal" />
+            <container name="partner.portal" htmlTag="div" htmlClass="partner-portal" />
         </referenceContainer>
 
         <!-- Remove Elements -->
