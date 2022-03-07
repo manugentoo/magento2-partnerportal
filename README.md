@@ -1,4 +1,4 @@
-“Manugentoo Partner Portal Magento 2 Module” extension
+“Partner Portal Magento 2 Module”
 =====================
 Magento 2 Manugentoo PartnerPortal Module
 Extension homepage: https://github.com/manugentoo/partnerportal
@@ -40,6 +40,3 @@ Enjoy!
 
 Best regards,
 Manu Gentoo
-
--------------
-\* see: http://devdocs.magento.com/guides/v2.0/config-guide/cli/config-cli-subcommands.html
