@@ -8,3 +8,11 @@
   display: flex;
   gap: 1rem;
 }
+.partners-vip-products .products.list.items {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(4, 1fr);
+}
+.partners-vip-products .products.list.items .product-item-details {
+  display: block;
+}

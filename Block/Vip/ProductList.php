@@ -3,6 +3,9 @@
 namespace Manugentoo\PartnerPortal\Block\Vip;
 
 use Amasty\Preorder\Helper\Data as AmastyHelperData;
+use Magento\Catalog\Block\Product\ReviewRendererInterface;
+use Magento\Catalog\Pricing\Price\FinalPrice;
+use Magento\Framework\Pricing\Render;
 use Manugentoo\PartnerPortal\Helper\Partner as PartnerHelper;
 use Manugentoo\PartnerPortal\Model\PartnersProducts;
 use Manugentoo\PartnerPortal\Model\PartnersRepository;
@@ -23,9 +26,8 @@ use Magento\Framework\Url\Helper\Data;
 use Magento\Store\Model\ScopeInterface;
 use Magento\Store\Model\StoreManagerInterface;
 
-
 /**
- * Class Products
+ * Class ProductList
  * @package Manugentoo\PartnerPortal\Block\Vip
  * @author Manu Gentoo <manugentoo@gmail.com>
  */
@@ -48,6 +50,10 @@ class ProductList extends Base
 	 * @var Data
 	 */
 	private $urlHelper;
+	/**
+	 * @var ReviewRendererInterface
+	 */
+	private $reviewRenderer;
 
 	public function __construct(
 		Template\Context $context,
@@ -60,12 +66,14 @@ class ProductList extends Base
 		PartnersProductCollectionFactory $partnersProductCollectionFactory,
 		ProductCollectionFactory $productCollectionFactory,
 		CartHelper $cartHelper,
-		Data $urlHelper
+		Data $urlHelper,
+		ReviewRendererInterface $reviewRenderer
 	) {
 		$this->partnersProductCollectionFactory = $partnersProductCollectionFactory;
 		$this->productCollectionFactory = $productCollectionFactory;
 		$this->cartHelper = $cartHelper;
 		$this->urlHelper = $urlHelper;
+		$this->reviewRenderer = $reviewRenderer;
 		parent::__construct($context, $data, $partnersRepository, $registry, $formKey, $partnerSession, $partnerHelper);
 	}
 
@@ -160,4 +168,76 @@ class ProductList extends Base
 		$objectManager = ObjectManager::getInstance();
 		return $objectManager->create(AmastyHelperData::class);
 	}
+
+	/**
+	 * @param Product $product
+	 * @param $templateType
+	 * @param $displayIfNoReviews
+	 * @return string
+	 */
+	public function getReviewsSummaryHtml(
+		\Magento\Catalog\Model\Product $product,
+		$templateType = false,
+		$displayIfNoReviews = false
+	) {
+		return $this->reviewRenderer->getReviewsSummaryHtml($product, $templateType, $displayIfNoReviews);
+	}
+
+	/**
+	 * @param Product $product
+	 * @return string
+	 */
+	public function getProductDetailsHtml(\Magento\Catalog\Model\Product $product)
+	{
+		$renderer = $this->getDetailsRenderer($product->getTypeId());
+		if ($renderer) {
+			$renderer->setProduct($product);
+			return $renderer->toHtml();
+		}
+		return '';
+	}
+
+	/**
+	 * @param Product $product
+	 * @return string
+	 */
+	public function getProductPrice(Product $product)
+	{
+		$priceRender = $this->getPriceRender();
+
+		$price = '';
+		if ($priceRender) {
+			$price = $priceRender->render(
+				FinalPrice::PRICE_CODE,
+				$product,
+				[
+					'include_container' => true,
+					'display_minimal_price' => true,
+					'zone' => Render::ZONE_ITEM_LIST,
+					'list_category_page' => true
+				]
+			);
+		}
+
+		return $price;
+	}
+
+	/**
+	 * @return mixed
+	 * @throws \Magento\Framework\Exception\LocalizedException
+	 */
+	protected function getPriceRender()
+	{
+		return $this->getLayout()->getBlock('product.price.render.default')
+			->setData('is_product_list', true);
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getToolbarHtml()
+	{
+		return $this->getChildHtml('toolbar');
+	}
+
 }
