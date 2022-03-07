@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+
+        <add id="Manugentoo_PartnerPortal::base"
+             title="Partner Portal"
+             module="Manugentoo_PartnerPortal"
+             sortOrder="150"
+             resource="Magento_Backend::content"
+             parent="Manugentoo_Base::base"
+        />
+
+        <add id="Manugentoo_PartnerPortal::manage_partners"
+             title="Manage Partners"
+             module="Manugentoo_PartnerPortal"
+             sortOrder="10"
+             resource="Magento_Backend::content"
+             parent="Manugentoo_PartnerPortal::base"
+             action="manugentoo_partnerportal/partners"
+        />
+
+        <add id="Manugentoo_PartnerPortal::partners_configuration"
+             title="Configuration"
+             module="Manugentoo_PartnerPortal"
+             sortOrder="12"
+             resource="Magento_Backend::content"
+             parent="Manugentoo_PartnerPortal::base"
+             action="admin/system_config/edit/section/partnerportal_config"
+        />
+    </menu>
+</config>

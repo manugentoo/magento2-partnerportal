@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="partnerportal_config" translate="label" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Partner Portal</label>
+            <tab>manugentoo</tab>
+            <resource>Manugentoo_PartnerPortal::partnerportal_config</resource>
+
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>General</label>
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Module</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+
+                </field>
+                <field id="otp_validity" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>OTP Validity (Minutes)</label>
+                    <comment>The Validity of OTP after sending the code to partners email.</comment>
+                </field>
+                <field id="access_token_validity" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Access Token Validity (Minutes)</label>
+                    <comment>The validity of partners access to partners product list page.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

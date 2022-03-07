@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Manu Gentoo <manugentoo@gmail.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <container name="cms.grid.container.main" htmlTag="div" htmlClass="grid-container">
+                <container name="partner.portal" htmlTag="div" htmlClass="cell small-12 partner-portal" />
+            </container>
+        </referenceContainer>
+
+        <!-- Remove Elements -->
+        <referenceBlock name="breadcrumbs" remove="true" />
+        <referenceContainer name="sidebar.main" remove="true" />
+        <referenceContainer name="div.sidebar.main" remove="true" />
+        <referenceContainer name="div.sidebar.additional" remove="true" />
+        <referenceContainer name="sidebar.additional" remove="true" />
+    </body>
+</page>

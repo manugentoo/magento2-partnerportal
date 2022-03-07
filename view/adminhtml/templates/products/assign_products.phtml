@@ -1,0 +1,21 @@
+<?php
+/** @var  \Manugentoo\PartnerPortal\Block\Adminhtml\AssignProducts $block */
+
+$blockGrid = $block->getBlockGrid();
+$gridJsObjectName = $blockGrid->getJsObjectName();
+?>
+<?= $block->getGridHtml() ?>
+<input type="hidden" name="partner_products" data-form-part="partners_form" id="partner_products" value=""  />
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Manugentoo_PartnerPortal/js/assign-products": {
+                "selectedProducts":  <?= /* @escapeNotVerified */ $block->getProductsJson() ?>,
+                "gridJsObjectName": <?= /* @escapeNotVerified */ '"' . $gridJsObjectName . '"' ?: '{}' ?>
+            }
+        }
+    }
+</script>
+<script>
+    require('mage/apply/main').apply();
+</script>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Manu Gentoo <manugentoo@gmail.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="partners_vip_handle"/>
+    <body>
+        <!-- Move Elements -->
+        <block class="Manugentoo\PartnerPortal\Block\Vip\OtpVerifyForm" name="partners_otp_verify_form" template="Manugentoo_PartnerPortal::vip/otp_verify_form.phtml" />
+        <move element="partners_otp_verify_form" destination="partner.portal"/>
+    </body>
+</page>

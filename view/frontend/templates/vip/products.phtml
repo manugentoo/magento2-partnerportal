@@ -1,0 +1,21 @@
+<?php /** @var \Manugentoo\PartnerPortal\Block\Vip\Index $block */ ?>
+<div class="content">
+    <div class="header">
+        <div class="grid-x">
+            <div class="cell large-6">
+                <h1><?=('EXCLUSIVE')?></h1>
+                <p><?=('Poly Pricing')?> - <?=$block->getPartner()->getName()?></p>
+            </div>
+            <div class="cell large-6 text-center medium-text-right">
+				<?php if($partnerImage = $block->getPartnerHeaderImage()):?>
+                    <img src="<?=$partnerImage?>" />
+				<?php endif ?>
+				<?php if($clientImage = $block->getClientHeaderImage()):?>
+                    <img src="<?=$clientImage?>" />
+				<?php endif ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?=$this->getChildHtml('partners_product_list')?>

@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <!-- Partners Table -->
+    <table name="manugentoo_partnerportal_partners" resource="default" engine="innodb">
+        <column comment="Id" identity="true" name="id" nullable="false" unsigned="false" xsi:type="int"/>
+        <constraint referenceId="PRIMARY" xsi:type="primary">
+            <column name="id"/>
+        </constraint>
+        <column length="255" name="name" nullable="true" xsi:type="varchar"/>
+        <column length="255" name="url" nullable="true" xsi:type="varchar"/>
+        <column length="255" name="email" nullable="true" xsi:type="varchar"/>
+        <column name="status" nullable="false" xsi:type="smallint" default="0"/>
+        <column length="50" name="gpt_reference_number" nullable="true" xsi:type="varchar"/>
+        <column length="255" name="partner_logo" nullable="true" xsi:type="varchar"/>
+        <column length="255" name="client_logo" nullable="true" xsi:type="varchar"/>
+        <column length="255" name="page_title" nullable="true" xsi:type="varchar"/>
+        <column name="intro_text" nullable="true" xsi:type="text"/>
+        <column name="created_at" nullable="true" xsi:type="date"/>
+        <column length="255" name="otp_code" nullable="true" xsi:type="varchar"/>
+        <column name="otp_created_at" nullable="true" xsi:type="datetime"/>
+        <column length="255" name="access_token" nullable="true" xsi:type="varchar"/>
+        <column name="access_token_created_at" nullable="true" xsi:type="datetime"/>
+        <constraint xsi:type="unique" referenceId="MGN_PP_PARTNERS_URL">
+            <column name="url"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="MGN_PP_PARTNERS_EMAIL">
+            <column name="email"/>
+        </constraint>
+    </table>
+
+    <!-- Partners Product Table -->
+    <table name="manugentoo_partnerportal_partners_products" resource="default" engine="innodb"
+           comment="Catalog Product To Partner Portal Linkage Table">
+        <column xsi:type="int" name="entity_id" unsigned="false" nullable="false" identity="true"
+                comment="Entity ID"/>
+        <column xsi:type="int" name="partner_id" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Partner ID"/>
+        <column xsi:type="int" name="product_id" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Product ID"/>
+        <column xsi:type="int" name="position" unsigned="false" nullable="false" identity="false"
+                default="0" comment="Position"/>
+        <column xsi:type="double" name="partner_price" unsigned="false" nullable="false"
+                default="0" comment="Partner Price"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+            <column name="partner_id"/>
+            <column name="product_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MGN_PP_PRD_ID_MGN_PP_PRD_ENTT_ENTT_ID" table="manugentoo_partnerportal_partners_products"
+                    column="product_id" referenceTable="catalog_product_entity"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MGN_PP_PART_ID_MGN_PP_ID" table="manugentoo_partnerportal_partners_products"
+                    column="partner_id" referenceTable="manugentoo_partnerportal_partners"
+                    referenceColumn="id" onDelete="CASCADE"/>
+        <constraint xsi:type="unique" referenceId="MGN_PP_PARTNERS_PRODUCT_PARTNER_ID_PRODUCT_ID">
+            <column name="partner_id"/>
+            <column name="product_id"/>
+        </constraint>
+        <index referenceId="MGN_PARTNERPORTAL_PARTNER_PRODUCTS_PRODUCT_ID" indexType="btree">
+            <column name="product_id"/>
+        </index>
+    </table>
+</schema>

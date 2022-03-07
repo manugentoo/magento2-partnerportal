@@ -1,0 +1,71 @@
+<?php /** @var \Manugentoo\PartnerPortal\Block\Vip\OtpVerifyForm $block */?>
+
+<div class="content">
+    <div class="grid-x">
+        <div class="cell large-6 medium-8 small-12 large-offset-3 page-header text-center">
+            <h1><?=('EXCLUSIVE')?></h1>
+            <p><?=('Poly Pricing')?> - <?=$block->getPartner()->getName()?></p>
+			<?php if($partnerImage = $block->getPartnerHeaderImage()):?>
+                <img src="<?=$partnerImage?>" />
+			<?php endif ?>
+			<?php if($clientImage = $block->getClientHeaderImage()):?>
+                <img src="<?=$clientImage?>" />
+			<?php endif ?>
+        </div>
+    </div>
+    <div class="grid-x">
+        <div class="cell large-6 medium-8 small-12 large-offset-3 text-center">
+            <div class="form">
+                <p><?=__('Thanks, please check your email for your One Time Password, valid only for one visit.')?></p>
+                <form action="<?=$block->getActionUrl()?>" method="post" id="form-otp">
+
+                    <input name="form_key" type="hidden" value="<?=$block->getFormKey();?>"/>
+                    <input type="hidden" name="partner_url" value="<?=$block->getPartner()->getUrl()?>"/>
+                    <input type="hidden" name="partner_email" value="<?=$block->getPartner()->getEmail()?>"/>
+
+                    <div class="grid-x grid-margin-x">
+                        <div class="cell auto">
+                            <input type="number" alt="otp1" id="otp1" data-next="otp2" class="input-text text-center otp-field" autocomplete="off" maxlength="1" data-validate="{required:true}">
+                        </div>
+                        <div class="cell auto">
+                            <input type="number" alt="otp2" id="otp2" data-next="otp3" data-previous="otp1" class="input-text text-center otp-field" autocomplete="off" maxlength="1" data-validate="{required:true}">
+                        </div>
+                        <div class="cell auto">
+                            <input type="number" alt="otp3" id="otp3" data-next="otp4" data-previous="otp2" class="input-text text-center otp-field" autocomplete="off" maxlength="1" data-validate="{required:true}">
+                        </div>
+                        <div class="cell auto">
+                            <input type="number" alt="otp4" id="otp4" data-next="otp5" data-previous="otp3" class="input-text text-center otp-field" autocomplete="off" maxlength="1" data-validate="{required:true}">
+                        </div>
+                        <div class="cell auto">
+                            <input type="number" alt="otp5" id="otp5" data-next="otp6" data-previous="otp4" class="input-text text-center otp-field" autocomplete="off" maxlength="1" data-validate="{required:true}">
+                        </div>
+                        <div class="cell auto">
+                            <input type="number" alt="otp6" id="otp6" data-previous="otp5" class="input-text text-center otp-field" autocomplete="off" maxlength="1" data-validate="{required:true}">
+                        </div>
+                    </div>
+
+                    <input type="hidden" placeholder="Enter OTP" name="otp_code" alt="otp" id="otpCode" class="input-text" data-validate="{required:true}">
+                    <button id="otp-submit" class="button green full-width bold">Submit</button>
+
+                    <a class="otp-resend" href="<?=$block->getResendOtpUrl()?>">Didn't received your OTP code? click here to resend.</a>
+                </form>
+            </div>
+            <p>Prefer to speak directly to our headsets team? <span class="phone-number">Ring <a href="tel:<?=Data::_DEFAULT_STORE_PHONE?>"class="ring"><?=Data::_DEFAULT_STORE_PHONE?></a></span> </p>
+        </div>
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "otpForm": {
+                "otpSubmitButton": "otp-submit",
+                "otpInputFields" : "otp-field",
+                "otpCode" : "otpCode"
+            },
+            "otpFormKeyUp": {
+                "otpForm" : "form-otp"
+            }
+        }
+    }
+</script>

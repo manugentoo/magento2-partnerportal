@@ -1,0 +1,229 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Manu Gentoo <manugentoo@gmail.com>
+ */
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">partners_form.partners_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Partners Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save_and_continue" class="Manugentoo\PartnerPortal\Block\Adminhtml\Partners\Edit\SaveAndContinueButton"/>
+            <button name="save" class="Manugentoo\PartnerPortal\Block\Adminhtml\Partners\Edit\SaveButton"/>
+            <button name="reset" class="Manugentoo\PartnerPortal\Block\Adminhtml\Partners\Edit\ResetButton"/>
+            <button name="delete" class="Manugentoo\PartnerPortal\Block\Adminhtml\Partners\Edit\DeleteButton"/>
+            <button name="back" class="Manugentoo\PartnerPortal\Block\Adminhtml\Partners\Edit\BackButton"/>
+        </buttons>
+        <namespace>partners_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>partners_form.partners_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="partners_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="Manugentoo_partnerportal/partners/save"/>
+        </settings>
+        <dataProvider class="Manugentoo\PartnerPortal\Model\Partners\DataProvider" name="partners_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general" sortOrder="10">
+        <settings>
+            <collapsible>true</collapsible>
+            <label translate="true">General</label>
+            <opened>true</opened>
+        </settings>
+        <field name="id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">id</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>id</dataScope>
+            </settings>
+        </field>
+        <field name="name" sortOrder="20" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">name</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Name</label>
+                <dataScope>name</dataScope>
+            </settings>
+        </field>
+        <field name="email" sortOrder="30" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">email</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="validate_email" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Email</label>
+                <dataScope>email</dataScope>
+            </settings>
+        </field>
+        <field name="url" sortOrder="40" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">url</item>
+                    <item name="additionalInfo" xsi:type="string" translate="true">
+                        <![CDATA[
+                            <small>A unique url for partner accessing gated page.</small>
+                        ]]>
+                    </item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Partner Url</label>
+                <dataScope>url</dataScope>
+            </settings>
+        </field>
+        <field name="gpt_reference_number" sortOrder="50" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">gpt_reference_number</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">GPT Reference Number</label>
+                <dataScope>gpt_reference_number</dataScope>
+            </settings>
+        </field>
+        <field name="page_title" sortOrder="60" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">page_title</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Page Title</label>
+                <dataScope>page_title</dataScope>
+            </settings>
+        </field>
+        <field name="intro_text" sortOrder="70" formElement="textarea">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">intro_text</item>
+                </item>
+            </argument>
+            <settings>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Intro Text</label>
+                <dataScope>intro_text</dataScope>
+            </settings>
+        </field>
+        <field name="partner_logo" formElement="imageUploader">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">partner_logo</item>
+                </item>
+            </argument>
+            <settings>
+                <elementTmpl>ui/form/element/uploader/image</elementTmpl>
+                <dataType>string</dataType>
+                <label translate="true">Partner Logo</label>
+                <visible>true</visible>
+                <required>false</required>
+            </settings>
+            <formElements>
+                <imageUploader>
+                    <settings>
+                        <allowedExtensions>jpg jpeg gif png</allowedExtensions>
+                        <maxFileSize>2097152</maxFileSize>
+                        <uploaderConfig>
+                            <param xsi:type="string" name="url">manugentoo_partnerportal/partners/uploadpartnerlogo</param>
+                        </uploaderConfig>
+                        <initialMediaGalleryOpenSubpath>manugentoo/partnerportal/images</initialMediaGalleryOpenSubpath>
+                    </settings>
+                </imageUploader>
+            </formElements>
+        </field>
+        <field name="client_logo" formElement="imageUploader">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">client_logo</item>
+                </item>
+            </argument>
+            <settings>
+                <elementTmpl>ui/form/element/uploader/image</elementTmpl>
+                <dataType>string</dataType>
+                <label translate="true">Client Logo</label>
+                <visible>true</visible>
+                <required>false</required>
+            </settings>
+            <formElements>
+                <imageUploader>
+                    <settings>
+                        <allowedExtensions>jpg jpeg gif png</allowedExtensions>
+                        <maxFileSize>2097152</maxFileSize>
+                        <uploaderConfig>
+                            <param xsi:type="string" name="url">manugentoo_partnerportal/partners/uploadclientlogo</param>
+                        </uploaderConfig>
+                        <initialMediaGalleryOpenSubpath>manugentoo/partnerportal/images</initialMediaGalleryOpenSubpath>
+                    </settings>
+                </imageUploader>
+            </formElements>
+        </field>
+    </fieldset>
+    <fieldset name="assign_product_grid">
+        <settings>
+            <collapsible>true</collapsible>
+            <label translate="true">Products</label>
+            <opened>false</opened>
+        </settings>
+        <container name="assign_products_container" >
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">170</item>
+                </item>
+            </argument>
+            <htmlContent name="html_content">
+                <argument name="block" xsi:type="object">Manugentoo\PartnerPortal\Block\Adminhtml\AssignProducts</argument>
+            </htmlContent>
+        </container>
+    </fieldset>
+</form>

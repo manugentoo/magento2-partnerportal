@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Manu Gentoo <manugentoo@gmail.com>
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="partners_vip_handle"/>
+    <body>
+        <!-- Move Elements -->
+        <block class="Manugentoo\PartnerPortal\Block\Vip\Products" name="partners_products" template="Manugentoo_PartnerPortal::vip/products.phtml">
+            <block class="Manugentoo\PartnerPortal\Block\Vip\ProductList" name="partners_product_list" template="Manugentoo_PartnerPortal::product/list.phtml" />
+        </block>
+        <move element="partners_products" destination="partner.portal"/>
+    </body>
+</page>
