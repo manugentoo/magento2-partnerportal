@@ -1,4 +1,4 @@
-<!--@subject {{trans "SH Partner Portal OTP Code"}} @-->
+<!--@subject {{trans "Partner Portal OTP Code"}} @-->
 <!--@vars {
 "var store.getFrontendName()":"Store Name",
 "var otp":"OTP",
@@ -7,7 +7,7 @@
 } @-->
 {{template config_path="design/email/header_template"}}
 
-<div style="padding: 20px; text-align: left">
+<div>
     <p>{{trans 'Hi %partner_name,' partner_name=$partner_name}}</p>
     <p>{{trans 'Your OTP (One Time Password) Code is %otp. Your Code will expire in %otp_expiration minutes.' otp=$otp otp_expiration=$otp_expiration}}</p>
 </div>

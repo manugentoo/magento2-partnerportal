@@ -200,12 +200,7 @@ $templateType     = ReviewRendererInterface::FULL_VIEW;
                                                                         </button>
 																	<?php else: ?>
 																		<?php if ($_product->getTypeId() == \Magento\ConfigurableProduct\Model\Product\Type\Configurable::TYPE_CODE):?>
-                                                                            <button type="submit"
-                                                                                    title="<?= $block->escapeHtml(__('Add to Cart')) ?>"
-                                                                                    class="action tocart primary button green rounded">
-                                                                        <span><?= /* @escapeNotVerified */
-																			__('Add to Cart') ?></span>
-                                                                            </button>
+
 																		<?php else:?>
                                                                             <a
                                                                                 title="Call To Order"
