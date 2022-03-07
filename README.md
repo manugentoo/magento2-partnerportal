@@ -34,7 +34,7 @@ Extension homepage: https://github.com/manugentoo/partnerportal
 
 ### HOW TO USE
 1. Add a partner from Admin
-2. Access the partner in frontend by typing vip/<partner_url>
+2. Access the partner in frontend by typing vip/
 
 Enjoy!
 
