@@ -32,6 +32,10 @@ Extension homepage: https://github.com/manugentoo/partnerportal
 >`$> php bin/magento setup:di:compile`
 >`$> php bin/magento setup:static-content:deploy`
 
+### HOW TO USE
+1. Add a partner from Admin
+2. Access the partner in frontend by typing vip/<partner_url>
+
 Enjoy!
 
 Best regards,
