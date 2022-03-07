@@ -5,20 +5,14 @@
         <span class="base" data-ui-id="page-title-wrapper"><?=('Exclusive Pricing')?> - <?=$block->getPartner()->getName()?></span>
     </h1>
 </div>
-
 <div class="form-verify-otp">
-
     <p><?=__('Please check your email for your One Time Password, valid only for one visit.')?></p>
-
     <form class="form" action="<?=$block->getActionUrl()?>" method="post" id="form-otp">
-
         <fieldset class="fieldset">
-
             <input name="form_key" type="hidden" value="<?=$block->getFormKey();?>"/>
             <input type="hidden" name="partner_url" value="<?=$block->getPartner()->getUrl()?>"/>
             <input type="hidden" name="partner_email" value="<?=$block->getPartner()->getEmail()?>"/>
             <input type="hidden" placeholder="Enter OTP" name="otp_code" alt="otp" id="otpCode" class="input-text" data-validate="{required:true}">
-
             <div class="field">
                 <div class="otp-codes">
                     <input type="number" alt="otp1" id="otp1" data-next="otp2" class="input-text text-center otp-field" autocomplete="off" maxlength="1" data-validate="{required:true}">
