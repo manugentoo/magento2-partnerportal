@@ -31,7 +31,7 @@ class Index extends Base
 			// if OTP has been requested redirect to OTP verification
 			if ($this->helperOtp->isOtpExpired($partner) == false && $partner->getOtpCreatedAt()) {
 				return $this->getResponse()->setRedirect(
-					$redirectUrl = $this->getOtpVerifyUrl()
+					$this->getOtpVerifyUrl()
 				);
 			}
 		}
