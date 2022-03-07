@@ -17,11 +17,11 @@ use Magento\Ui\Component\Listing\Columns\Column;
 class PartnersActions extends Column
 {
 	/** Url path */
-	const CMS_URL_PATH_EDIT = 'Manugentoo_partnerportal/partners/edit';
+	const CMS_URL_PATH_EDIT = 'manugentoo_partnerportal/partners/edit';
 	/**
 	 *
 	 */
-	const CMS_URL_PATH_DELETE = 'Manugentoo_partnerportal/partners/delete';
+	const CMS_URL_PATH_DELETE = 'manugentoo_partnerportal/partners/delete';
 
 	/**
 	 * @var \Magento\Framework\UrlInterface

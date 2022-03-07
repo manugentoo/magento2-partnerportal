@@ -33,7 +33,7 @@
             </item>
         </argument>
         <settings>
-            <submitUrl path="Manugentoo_partnerportal/partners/save"/>
+            <submitUrl path="manugentoo_partnerportal/partners/save"/>
         </settings>
         <dataProvider class="Manugentoo\PartnerPortal\Model\Partners\DataProvider" name="partners_form_data_source">
             <settings>
