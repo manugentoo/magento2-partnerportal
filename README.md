@@ -1,7 +1,7 @@
 “Partner Portal Magento 2 Module”
 =====================
 Magento 2 Manugentoo PartnerPortal Module
-Extension homepage: https://github.com/manugentoo/partnerportal
+Extension homepage: https://github.com/manugentoo/magento2-module-partnerportal
 
 ## CONTACTS
 * Email: manugentoo@gmail.com
