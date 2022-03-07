@@ -102,7 +102,6 @@ class AccessToken
 	}
 
 	/**
-	 * @param Partners $partner
 	 * @return $this
 	 * @throws \Magento\Framework\Exception\CouldNotSaveException
 	 */
@@ -111,13 +110,15 @@ class AccessToken
 		$partner = $this->getPartner();
 
 		if($partner) {
+
+			$this->partnerSession->unsPartner();
+			$this->partnerSession->unsPartnerProducts();
+
 			$partner->setAccessToken(null);
 			$partner->setAccessTokenCreatedAt(null);
 			$partner->setOtpCode(null);
 			$partner->setOtpCreatedAt(null);
 			$this->partnersRepository->save($partner);
-			$this->partnerSession->unsPartner();
-			$this->partnerSession->unsPartnerProducts();
 		}
 		return $this;
 	}

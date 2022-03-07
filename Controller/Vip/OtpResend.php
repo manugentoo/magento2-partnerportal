@@ -36,8 +36,9 @@ class OtpResend extends Base
 		$partner = $this->getPartner();
 
 		if($partner === false) {
-			$redirectUrl = $this->getNoRouteUrl();
-			return $this->getResponse()->setRedirect($redirectUrl);
+			return $this->getResponse()->setRedirect(
+				$this->getNoRouteUrl()
+			);
 		}
 
 
@@ -45,8 +46,9 @@ class OtpResend extends Base
 
 			// force redirect to partners product page if token is found
 			if ($this->accessTokenHelper->isAccessTokenExpired() == false) {
-				$redirectUrl = $this->getPartnerProductsUrl() . $partner->getUrl();
-				return $this->getResponse()->setRedirect($redirectUrl);
+				return $this->getResponse()->setRedirect(
+					$this->getPartnerProductsUrl()
+				);
 			}
 
 			$partnerSession = $this->partnerSession;
@@ -66,8 +68,9 @@ class OtpResend extends Base
 
 				if(is_array($otpAttempts) && $otpAttempts['attempts'] >= self::OTP_MAX_ATTEMPT) {
 					$this->messageManager->addErrorMessage(__(PartnersMessageInterface::ERROR_MESSAGE_OTP_RESEND, self::OTP_MAX_MIN_ATTEMPT_PAUSE));
-					$redirectUrl = $this->getOtpVerifyUrl() . $partner->getUrl();
-					return $this->getResponse()->setRedirect($redirectUrl);
+					return $this->getResponse()->setRedirect(
+						$this->getOtpVerifyUrl()
+					);
 				}
 			}
 
@@ -87,8 +90,9 @@ class OtpResend extends Base
 			}
 
 			$this->messageManager->addSuccessMessage(__(PartnersMessageInterface::MESSAGE_OTP_RESEND));
-			$redirectUrl = $this->getOtpVerifyUrl() . $partner->getUrl();
-			return $this->getResponse()->setRedirect($redirectUrl);
+			return $this->getResponse()->setRedirect(
+				$this->getOtpVerifyUrl()
+			);
 		}
 
 		return $this->getResponse()->setRedirect($this->getIndexUrl());

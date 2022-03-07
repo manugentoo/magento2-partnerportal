@@ -16,27 +16,26 @@ class Index extends Base
 	public function execute()
 	{
 		parent::execute();
-		$partner = $this->getPartner();
 
-		if($partner === false) {
-			$redirectUrl = $this->getNoRouteUrl();
-			return $this->getResponse()->setRedirect($redirectUrl);
-		}
+		$partner = $this->getPartner();
 
 		if($partner) {
 
 			// force redirect to partners product page if token is found
 			if ($this->accessTokenHelper->isAccessTokenExpired() == false) {
-				$redirectUrl = $this->getPartnerProductsUrl() . $partner->getUrl();
-				return $this->getResponse()->setRedirect($redirectUrl);
+				return $this->getResponse()->setRedirect(
+					$this->getPartnerProductsUrl()
+				);
 			}
 
 			// if OTP has been requested redirect to OTP verification
 			if ($this->helperOtp->isOtpExpired($partner) == false && $partner->getOtpCreatedAt()) {
-				$redirectUrl = $this->getOtpVerifyUrl() . $partner->getUrl();
-				return $this->getResponse()->setRedirect($redirectUrl);
+				return $this->getResponse()->setRedirect(
+					$redirectUrl = $this->getOtpVerifyUrl()
+				);
 			}
 		}
+
 		return $this->_pageFactory->create();
 	}
 }

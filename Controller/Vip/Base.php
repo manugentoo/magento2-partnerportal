@@ -131,40 +131,13 @@ class Base extends Action
 		}
 
 		$request = $this->getRequest();
-		$params = array_keys($request->getParams());
-
-		// Check param if null redirect to 404
-		if (!count($params)) {
-			$this->redirectToNoRoute();
-			return;
-		}
-
-		$partner = $this->getPartner();
-
-		if ($partner && $partner->getUrl() != $params[0]) {
-			$this->accessTokenHelper->expireAccessToken();
-		}
 
 		// prevent access on base controller
 		if ($request->getActionName() == 'base') {
-			$indexUrl = $this->getIndexUrl() . $partner->getUrl();
-			return $this->getResponse()->setRedirect($indexUrl);
+			return $this->getResponse()->setRedirect(
+				$this->getIndexUrl()
+			);
 		}
-
-
-		if ($partner == false) {
-			$this->redirectToNoRoute();
-			return;
-		}
-	}
-
-	/**
-	 * Redirect to No Route
-	 */
-	protected function redirectToNoRoute()
-	{
-		$noRouteurl = $this->getNoRouteUrl();
-		return $this->getResponse()->setRedirect($noRouteurl);
 	}
 
 	/**
@@ -172,31 +145,7 @@ class Base extends Action
 	 */
 	public function getPartner()
 	{
-		if ($this->partner) {
-			return $this->partner;
-		}
-
-		$request = $this->getRequest();
-		$params = array_keys($request->getParams());
-
-		// If partner found, check if exists. If not exists, redirect to 404
-		$partnerUrlKey = isset($params[0]) ? $params[0] : null;
-		$partner = $this->partnersRepository->loadPartnerByUrl($partnerUrlKey);
-
-		if ($partner) {
-			$this->partner = $partner;
-			$this->partnerHelper->setPartner($partner);
-
-			// load Partner Products
-			/** @var PartnerProductsCollection $partnerProducts */
-			$partnerProducts = $this->partnerProductsCollectionFactory->create();
-			$partnerProducts->addPartnersFilter($partner->getId());
-			$this->partnerHelper->setPartnerProducts($partnerProducts);
-
-			return $this->partnerHelper->getPartner();
-		}
-
-		return false;
+		return $this->partnerHelper->getPartner();
 	}
 
 	/**
@@ -211,12 +160,9 @@ class Base extends Action
 	 * @param Partners $partner
 	 * @return $this
 	 */
-	protected function renewPartnerRegistry(Partners $partner)
+	protected function registerPartner(Partners $partner)
 	{
-		$this->partnerHelper->setPartner($partner);
-		$this->partnerSession->unsPartner();
-		$this->partnerSession->setPartner($partner);
-		return $this;
+		return $this->partnerHelper->registerPartner($partner);
 	}
 
 	/**

@@ -20,34 +20,29 @@ class Products extends Base
 		parent::execute();
 		$partner = $this->getPartner();
 
-		if($partner === false) {
-			$redirectUrl = $this->getNoRouteUrl();
-			return $this->getResponse()->setRedirect($redirectUrl);
+		if ($partner == null) {
+			return $this->getResponse()->setRedirect(
+				$this->getIndexUrl()
+			);
 		}
 
-
-		if($partner) {
-
-			// validate access token
-			if ($this->accessTokenHelper->isAccessTokenExpired() == true) {
-				if($this->helperOtp->isOtpExpired($partner) == true) {
-					$this->messageManager->addErrorMessage(
-						__(PartnersMessageInterface::ERROR_MESSAGE_TOKEN_EXPIRED)
-					);
-				}
-
-				$indexUrl = $this->getIndexUrl() . $partner->getUrl();
-				return $this->getResponse()->setRedirect($indexUrl);
-			}
-
-			// validate access token
+		// validate access token
+		if ($this->accessTokenHelper->isAccessTokenExpired() == true) {
 			if($this->helperOtp->isOtpExpired($partner) == true) {
-				$redirectUrl = $this->getIndexUrl() . $partner->getUrl();
-				return $this->getResponse()->setRedirect($redirectUrl);
+				$this->messageManager->addErrorMessage(
+					__(PartnersMessageInterface::ERROR_MESSAGE_TOKEN_EXPIRED)
+				);
 			}
+			return $this->getResponse()->setRedirect(
+				$this->getIndexUrl()
+			);
+		}
 
-		}  else {
-			$this->redirectToNoRoute();
+		// validate access token
+		if($this->helperOtp->isOtpExpired($partner) == true) {
+			return $this->getResponse()->setRedirect(
+				$this->getIndexUrl()
+			);
 		}
 
 		return $this->_pageFactory->create();

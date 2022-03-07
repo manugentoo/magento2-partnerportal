@@ -37,11 +37,6 @@ class Router implements \Magento\Framework\App\RouterInterface
 		if(isset($d[0]) && ($d[0] == 'vip')) {
 
 			$request->setModuleName('partners')->setControllerName('vip')->setActionName('index');
-
-			if(isset($d[1])) {
-				$request->setParams([$d[1] => $d[1]]);
-			}
-
 			$request->setAlias(\Magento\Framework\Url::REWRITE_REQUEST_PATH_ALIAS, $identifier);
 
 			return $this->actionFactory->create(

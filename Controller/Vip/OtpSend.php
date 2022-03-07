@@ -17,9 +17,9 @@ class OtpSend extends Base
 	 */
 	public function execute()
 	{
+
 		$request = $this->getRequest();
-		$partnerUrl = $request->getParam('partner_url');
-		$indexUrl = $this->getIndexUrl() . $partnerUrl;
+		$indexUrl = $this->getIndexUrl();
 
 		// make sure that this controller only accepts post request
 		if (!$this->getRequest()->getPostValue()) {
@@ -33,22 +33,9 @@ class OtpSend extends Base
 
 		if ($partner) {
 
-			// force redirect to partners product page if token is found
-			if($this->accessTokenHelper->isAccessTokenExpired() == false){
-				$redirectUrl = $this->getPartnerProductsUrl(). $partner->getUrl();
-				return $this->getResponse()->setRedirect($redirectUrl);
-			}
+			$this->accessTokenHelper->expireAccessToken();
 
-			$this->renewPartnerRegistry($partner);
-
-			// validate partner url if valid
-			if ($partner->getUrl() != $request->getParam('partner_url')) {
-				$this->messageManager->addErrorMessage(
-					__(PartnersMessageInterface::EMAIL_TEXT_ERROR_EMAIL_NOT_MATCH)
-				);
-				$this->getResponse()->setRedirect($indexUrl);
-				return;
-			}
+			$this->registerPartner($partner);
 
 			// Send OTP to partner Email
 			if ($this->helperOtp->isOtpExpired($partner)) {
@@ -56,12 +43,10 @@ class OtpSend extends Base
 				$this->helperOtp->registerOtpCode($partner);
 
 				//redirect to Verify OTP Form Page
-				// $this->messageManager->addNoticeMessage(__(PartnersMessageInterface::MESSAGE_EMAIL_TEXT_OTP_SENT));
-				$redirectUrl = $this->getOtpVerifyUrl() . $partnerUrl;
+				$redirectUrl = $this->getOtpVerifyUrl();
 				return $this->getResponse()->setRedirect($redirectUrl);
 			} else {
-				// $this->messageManager->addNoticeMessage(__(PartnersMessageInterface::MESSAGE_EMAIL_TEXT_OTP_SENT));
-				$redirectUrl = $this->getOtpVerifyUrl() . $partnerUrl;
+				$redirectUrl = $this->getOtpVerifyUrl();
 				return $this->getResponse()->setRedirect($redirectUrl);
 			}
 		} else {

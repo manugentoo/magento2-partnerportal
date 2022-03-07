@@ -2,10 +2,12 @@
 
 namespace Manugentoo\PartnerPortal\Helper;
 
+use Manugentoo\PartnerPortal\Helper\AccessToken as AccessTokenHelper;
 use Manugentoo\PartnerPortal\Model\Partners;
 use Manugentoo\PartnerPortal\Model\PartnersProducts;
 use Manugentoo\PartnerPortal\Model\ResourceModel\PartnersProducts\Collection as PartnerProductsCollection;
 use Manugentoo\PartnerPortal\Model\Session as PartnerSession;
+use Manugentoo\PartnerPortal\Model\ResourceModel\PartnersProducts\CollectionFactory as PartnerProductCollectionFactory;
 
 /**
  * Class Partner
@@ -26,14 +28,28 @@ class Partner
 	 * @var
 	 */
 	protected $partnerProducts;
+	/**
+	 * @var PartnerProductCollectionFactory
+	 */
+	private $partnerProductsCollectionFactory;
+	/**
+	 * @var AccessTokenHelper
+	 */
+	private $accessTokenHelper;
 
 	/**
 	 * @param PartnerSession $partnerSession
+	 * @param PartnerProductCollectionFactory $partnerProductsCollectionFactory
+	 * @param AccessToken $accessTokenHelper
 	 */
 	public function __construct(
-		PartnerSession $partnerSession
+		PartnerSession $partnerSession,
+		PartnerProductCollectionFactory $partnerProductsCollectionFactory,
+		AccessTokenHelper $accessTokenHelper
 	) {
 		$this->partnerSession = $partnerSession;
+		$this->partnerProductsCollectionFactory = $partnerProductsCollectionFactory;
+		$this->accessTokenHelper = $accessTokenHelper;
 	}
 
 	/**
@@ -54,9 +70,16 @@ class Partner
 	 * @param Partners $partner
 	 * @return $this
 	 */
-	public function setPartner(Partners $partner)
+	public function registerPartner(Partners $partner)
 	{
 		$this->partnerSession->setPartner($partner);
+
+		// load Partner Products
+		/** @var PartnerProductsCollection $partnerProducts */
+		$partnerProducts = $this->partnerProductsCollectionFactory->create();
+		$partnerProducts->addPartnersFilter($partner->getId());
+		$this->setPartnerProducts($partnerProducts);
+
 		return $this;
 	}
 

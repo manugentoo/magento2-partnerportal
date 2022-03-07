@@ -10,7 +10,7 @@ interface PartnersMessageInterface
 	/**
 	 * @var string
 	 */
-	const ERROR_MESSAGE_EMAIL_DONT_MATCH = 'The email you entered don\t match from the registered url. Please try again.';
+	const ERROR_MESSAGE_EMAIL_DONT_MATCH = 'The email you entered isnot found.';
 	/**
 	 * @var string
 	 */
@@ -42,5 +42,5 @@ interface PartnersMessageInterface
 	/**
 	 * @string
 	 */
-	const EMAIL_TEXT_ERROR_EMAIL_NOT_MATCH = 'The email you entered don\'t match from the registered url. Please try again.';
+	const EMAIL_TEXT_ERROR_EMAIL_NOT_MATCH = 'The email you entered is not found.';
 }
