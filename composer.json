@@ -1,0 +1,30 @@
+{
+    "name": "manugentoo/partnerportal",
+    "description": "Manugentoo Partner Portal Module",
+    "keywords": ["magento", "magento2 extension", "magento 2 extension", "extension", "module", "magento2 module", "magento 2 module"],
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "homepage": "https://github.com/manugentoo/base",
+    "authors": [
+        {
+            "name": "Manuel Santos",
+            "email": "manugentoo@gmail.com"
+        }
+    ],
+    "license": [
+        "OSL-3.0",
+        "AFL-3.0"
+    ],
+    "require": {
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Manugentoo\\PartnerPortal\\": ""
+        }
+    },
+    "minimum-stability": "alpha",
+    "prefer-stable": true
+}
