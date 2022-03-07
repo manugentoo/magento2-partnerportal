@@ -4,7 +4,7 @@
     "keywords": ["magento", "magento2 extension", "magento 2 extension", "extension", "module", "magento2 module", "magento 2 module"],
     "type": "magento2-module",
     "version": "1.0.0",
-    "homepage": "https://github.com/manugentoo/base",
+    "homepage": "https://github.com/manugentoo/partnerportal",
     "authors": [
         {
             "name": "Manuel Santos",
