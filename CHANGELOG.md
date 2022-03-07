@@ -1,4 +1,4 @@
-# "Regenerate Url rewrites" Change Log
+# "Partner Portal Magento 2 Module
 
 All notable changes to this project will be documented in this file.
 
