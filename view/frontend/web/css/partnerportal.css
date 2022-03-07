@@ -1,0 +1,10 @@
+/* Index Page */
+.partners-vip-index .form,
+.partners-vip-otpverify .form {
+  max-width: 400px;
+}
+.partners-vip-index .form .otp-codes,
+.partners-vip-otpverify .form .otp-codes {
+  display: flex;
+  gap: 1rem;
+}

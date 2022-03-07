@@ -1,20 +1,32 @@
 <?php /** @var \Manugentoo\PartnerPortal\Block\Vip\Index $block */ ?>
 
-<div class="">
-    <h1><?=('EXCLUSIVE')?></h1>
-    <h3><?=('Pricing')?> - <?=$block->getPartner()->getName()?></h3>
-	<?php if($partnerImage = $block->getPartnerHeaderImage()):?>
-        <img src="<?=$partnerImage?>" />
-	<?php endif ?>
-	<?php if($clientImage = $block->getClientHeaderImage()):?>
-        <img src="<?=$clientImage?>" />
-	<?php endif ?>
+<div class="page-title-wrapper">
+    <h1 class="page-title">
+        <span class="base" data-ui-id="page-title-wrapper"><?=('Exclusive Pricing')?> - <?=$block->getPartner()->getName()?></span>
+    </h1>
 </div>
 
-<p><?=__('Simply enter your work email address to access your recommended products and special pricing.')?></p>
-<form action="<?=$block->getOtpActionUrl()?>" method="post">
-    <input name="form_key" type="hidden" value="<?=$block->getFormKey();?>"/>
-    <input type="hidden" name="partner_url" value="<?=$block->getPartner()->getUrl()?>"/>
-    <input type="text" name="email" placeholder="Please enter your email.."/>
-    <button class="button green full-width bold">Submit</button>
-</form>
+<div class="form-verify-otp">
+    <p><?=__('Simply enter your work email address to access your recommended products and special pricing.')?></p>
+    <form class="form" action="<?=$block->getOtpActionUrl()?>" method="post">
+        <input name="form_key" type="hidden" value="<?=$block->getFormKey();?>"/>
+        <input type="hidden" name="partner_url" value="<?=$block->getPartner()->getUrl()?>"/>
+
+        <fieldset class="fieldset">
+            <div class="field">
+                <input type="text" name="email" placeholder="Please enter your email.."/>
+            </div>
+            <div class="field">
+
+                <div class="primary">
+                    <button id="otp-submit" type="submit" class="action submit primary" Title="Submit">
+                        <span>Submit</span>
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+
+

@@ -5,11 +5,12 @@
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Manugentoo_PartnerPortal::css/partnerportal.css" rel="stylesheet" type="text/css"  />
+    </head>
     <body>
         <referenceContainer name="content">
-            <container name="cms.grid.container.main" htmlTag="div" htmlClass="grid-container">
-                <container name="partner.portal" htmlTag="div" htmlClass="cell small-12 partner-portal" />
-            </container>
+            <container name="partner.portal" htmlTag="div" htmlClass="cell small-12 partner-portal" />
         </referenceContainer>
 
         <!-- Remove Elements -->
