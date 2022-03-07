@@ -8,3 +8,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Changed
 - Initial Files
 
+## [1.0.1] - 2022-03-07
+### Changed
+- Adding Dependencies
+
